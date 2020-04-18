@@ -4,6 +4,8 @@
 @import url("https://fonts.googleapis.com/css?family=Ubuntu");
 
 $family-sans-serif: "Ubuntu", sans-serif;
+$green: #0abf53;
+$primary: $green;
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
