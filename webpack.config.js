@@ -37,10 +37,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Next Desk',
-      meta: {
-        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-      }
+      template: 'src/index.html'
     })
   ],
   output: {
