@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Calendar } from './components/calendar/calendar';
+
 import './styles/styles.scss';
 
 const App: React.FunctionComponent = () => {
@@ -12,6 +14,11 @@ const App: React.FunctionComponent = () => {
             <h1 className="title">Next Desk</h1>
             <h2 className="subtitle">Choose your next office to work from.</h2>
           </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <Calendar />
         </div>
       </section>
     </>

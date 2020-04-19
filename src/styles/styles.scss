@@ -7,8 +7,11 @@ $family-sans-serif: "Ubuntu", sans-serif;
 $green: #0abf53;
 $primary: $green;
 
+@import "../../node_modules/react-datepicker/dist/react-datepicker.css";
+
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
+@import "../../node_modules/bulma/sass/form/_all.sass";
 @import "../../node_modules/bulma/sass/layout/section.sass";
 @import "../../node_modules/bulma/sass/layout/hero.sass";
 @import "../../node_modules/bulma/sass/grid/columns.sass";
@@ -17,4 +20,3 @@ $primary: $green;
 @import "../../node_modules/bulma/sass/elements/title.sass";
 @import "../../node_modules/bulma/sass/elements/box.sass";
 @import "../../node_modules/bulma/sass/elements/button.sass";
-@import "../../node_modules/bulma/sass/elements/form.sass";
