@@ -12,3 +12,4 @@ dist/
 *.orig
 *.log
 **/.npmrc
+*.txt
