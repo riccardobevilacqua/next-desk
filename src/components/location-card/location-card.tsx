@@ -6,8 +6,8 @@ interface LocationCardProps {
 
 const LocationCard: React.FunctionComponent<LocationCardProps> = (props: LocationCardProps) => {
   return (
-    <div className="card">
-      <div className="card-content">
+    <div className="box">
+      <div className="content">
         <p className="title">{props.title}</p>
         <p>Some Text</p>
       </div>
