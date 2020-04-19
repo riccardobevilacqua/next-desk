@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface CardProps {
+interface LocationCardProps {
   title: string;
 }
 
-const Card: React.FunctionComponent<CardProps> = (props: CardProps) => {
+const LocationCard: React.FunctionComponent<LocationCardProps> = (props: LocationCardProps) => {
   return (
     <div className="card">
       <div className="card-content">
@@ -15,4 +15,4 @@ const Card: React.FunctionComponent<CardProps> = (props: CardProps) => {
   );
 }
 
-export { Card, CardProps };
+export { LocationCard, LocationCardProps };
