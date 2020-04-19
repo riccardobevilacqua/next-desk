@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Header: React.FunctionComponent<{}> = () => {
+const Header: React.FunctionComponent<{}> = () => {
   return (
     <section className="hero is-primary is-bold">
       <div className="hero-body">
@@ -12,3 +12,5 @@ export const Header: React.FunctionComponent<{}> = () => {
     </section>
   );
 }
+
+export { Header };

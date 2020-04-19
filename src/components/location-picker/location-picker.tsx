@@ -1,16 +1,18 @@
 import React from 'react';
 
-export const locations: string[] = [
+const locations: string[] = [
   'Amsterdam',
   'Budapest',
   'Madrid'
 ];
 
-export interface LocationPickerProps {
+interface LocationPickerProps {
   label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const LocationPicker: React.FunctionComponent<LocationPickerProps> = (props: LocationPickerProps) => {
+const LocationPicker: React.FunctionComponent<LocationPickerProps> = (props: LocationPickerProps) => {
   const options: JSX.Element[] = locations.map((location, index) => {
     return (
       <option value={location} key={index}>{location}</option>
@@ -22,7 +24,7 @@ export const LocationPicker: React.FunctionComponent<LocationPickerProps> = (pro
       <label className="label">{props.label}</label>
       <div className="control">
         <div className="select">
-          <select>
+          <select value={props.value} onChange={e => props.onChange(e)}>
             <option value="">-</option>
             {options}
           </select>
@@ -31,3 +33,5 @@ export const LocationPicker: React.FunctionComponent<LocationPickerProps> = (pro
     </div>
   );
 }
+
+export { LocationPicker, LocationPickerProps, locations }
