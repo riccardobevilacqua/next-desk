@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 
+import { Location } from '../../common/location';
 import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
 
-const locations: string[] = [
-  'Amsterdam',
-  'Budapest',
-  'Madrid'
+
+const locations: Location[] = [
+  {
+    city: 'Amsterdam',
+    country: 'NL'
+  },
+  {
+    city: 'Budapest',
+    country: 'HU'
+  },
+  {
+    city: 'Madrid',
+    country: 'ES'
+  }
 ];
 
 const Planner: React.FunctionComponent = () => {
@@ -17,8 +28,8 @@ const Planner: React.FunctionComponent = () => {
   };
 
   const destinations = locations.reduce((acc, current, index) => {
-    if (departureLocation && departureLocation !== '' && current !== departureLocation) {
-      acc.push(<LocationCard title={current} key={index} />);
+    if (departureLocation && departureLocation !== '' && current.city !== departureLocation) {
+      acc.push(<LocationCard title={current.city} key={index} />);
     }
 
     return acc;

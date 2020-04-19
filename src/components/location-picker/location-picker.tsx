@@ -1,16 +1,18 @@
 import React from 'react';
 
+import { Location } from '../../common/location';
+
 interface LocationPickerProps {
   label: string;
   value: string;
-  locations: string[];
+  locations: Location[];
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const LocationPicker: React.FunctionComponent<LocationPickerProps> = (props: LocationPickerProps) => {
   const options: JSX.Element[] = props.locations.map((location, index) => {
     return (
-      <option value={location} key={index}>{location}</option>
+      <option value={location.city} key={index}>{location.city}</option>
     )
   });
 
