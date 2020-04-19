@@ -1,14 +1,18 @@
 import React from 'react';
 
-const Card: React.FunctionComponent = () => {
+interface CardProps {
+  title: string;
+}
+
+const Card: React.FunctionComponent<CardProps> = (props: CardProps) => {
   return (
     <div className="card">
       <div className="card-content">
-        <p className="title">Card Title</p>
+        <p className="title">{props.title}</p>
         <p>Some Text</p>
       </div>
     </div>
   );
 }
 
-export { Card };
+export { Card, CardProps };

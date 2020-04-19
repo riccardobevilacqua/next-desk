@@ -16,18 +16,21 @@ const Planner: React.FunctionComponent = () => {
     setDepartureLocation(e.target.value)
   };
 
+  const destinations = locations
+    .filter(location => departureLocation && departureLocation !== '' && location !== departureLocation)
+    .map((location, index) => (<Card title={location} key={index} />));
+
   return (
     <>
       <section className="section">
         <div className="container">
-          <fieldset>
-            <LocationPicker
-              label="Departure"
-              value={departureLocation}
-              locations={locations}
-              onChange={handleDepartureChange}
-            />
-          </fieldset>
+          <LocationPicker
+            label="Departure"
+            value={departureLocation}
+            locations={locations}
+            onChange={handleDepartureChange}
+          />
+          {destinations}
         </div>
       </section>
     </>
