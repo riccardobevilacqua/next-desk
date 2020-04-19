@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
 
 import { LocationPicker } from '../location-picker/location-picker';
+import { Card } from '../card/card';
+
+const locations: string[] = [
+  'Amsterdam',
+  'Budapest',
+  'Madrid'
+];
 
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
-  const [destinationLocation, setDestinationLocation] = useState('');
 
   const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDepartureLocation(e.target.value)
   };
 
-  const handleDestinationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDestinationLocation(e.target.value)
-  };
-
   return (
-    <section className="section">
-      <div className="container">
-        <fieldset>
-          <LocationPicker label="Departure" value={departureLocation} onChange={handleDepartureChange} />
-          <LocationPicker label="Destination" value={destinationLocation} onChange={handleDestinationChange} />
-        </fieldset>
-      </div>
-    </section>
+    <>
+      <section className="section">
+        <div className="container">
+          <fieldset>
+            <LocationPicker
+              label="Departure"
+              value={departureLocation}
+              locations={locations}
+              onChange={handleDepartureChange}
+            />
+          </fieldset>
+        </div>
+      </section>
+    </>
   );
 }
 
