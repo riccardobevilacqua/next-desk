@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Location } from '../../common/location';
 import { LocationPicker } from '../location-picker/location-picker';
@@ -22,6 +22,17 @@ const locations: Location[] = [
 
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/api/forecasts');
+      const parsed = await response.json();
+
+      console.info(parsed);
+    };
+
+    fetchData();
+  }, []);
 
   const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDepartureLocation(e.target.value)
