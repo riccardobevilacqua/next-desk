@@ -25,7 +25,7 @@ const Planner: React.FunctionComponent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/api/forecasts');
+      const response = await fetch('/api/forecasts/2759794');
       const parsed = await response.json();
 
       console.info(parsed);
