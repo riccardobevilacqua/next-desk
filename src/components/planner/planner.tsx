@@ -4,35 +4,53 @@ import { Location } from '../../common/location';
 import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
 
-
 const locations: Location[] = [
   {
     city: 'Amsterdam',
-    country: 'NL'
+    country: 'NL',
+    forecastId: 2759794,
   },
   {
     city: 'Budapest',
-    country: 'HU'
+    country: 'HU',
+    forecastId: 3054643,
   },
   {
     city: 'Madrid',
-    country: 'ES'
+    country: 'ES',
+    forecastId: 3117735
   }
 ];
 
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
+  const [forecasts, setForecasts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/api/forecasts/2759794');
-      const parsed = await response.json();
+    if (departureLocation && departureLocation !== '') {
+      locations.forEach(location => {
+        if (location.city !== departureLocation) {
+          fetchData(location.forecastId);
+        }
+      });
+    }
+  }, [departureLocation]);
 
-      console.info(parsed);
-    };
+  const fetchData = async (forecastId: number) => {
+    const response = await fetch('/api/forecasts/' + forecastId);
+    const parsed = await response.json();
 
-    fetchData();
-  }, []);
+    setForecasts(prevState => {
+      const list = [...prevState];
+      const index = list.findIndex(item => item.city.id === forecastId);
+
+      if (index > -1) {
+        return list.map(item => item.city.id === forecastId ? parsed : item);
+      } else {
+        return [...list, parsed];
+      }
+    });
+  };
 
   const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDepartureLocation(e.target.value)
