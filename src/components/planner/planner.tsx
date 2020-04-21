@@ -1,40 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { Location } from '../../common/location';
 import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
-
-const locations: Location[] = [
-  {
-    city: 'Amsterdam',
-    country: 'NL',
-    forecastId: 2759794,
-  },
-  {
-    city: 'Budapest',
-    country: 'HU',
-    forecastId: 3054643,
-  },
-  {
-    city: 'Madrid',
-    country: 'ES',
-    forecastId: 3117735
-  }
-];
+import { locations } from '../../common/location';
 
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
   const [forecasts, setForecasts] = useState([]);
-
-  useEffect(() => {
-    if (departureLocation && departureLocation !== '') {
-      locations.forEach(location => {
-        if (location.city !== departureLocation) {
-          fetchData(location.forecastId);
-        }
-      });
-    }
-  }, [departureLocation]);
 
   const fetchData = async (forecastId: number) => {
     const response = await fetch('/api/forecasts/' + forecastId);
@@ -52,13 +24,23 @@ const Planner: React.FunctionComponent = () => {
     });
   };
 
+  useEffect(() => {
+    if (departureLocation && departureLocation !== '') {
+      locations.forEach(location => {
+        if (location.city !== departureLocation) {
+          fetchData(location.forecastId);
+        }
+      });
+    }
+  }, [departureLocation]);
+
   const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDepartureLocation(e.target.value)
   };
 
-  const destinations = locations.reduce((acc, current, index) => {
-    if (departureLocation && departureLocation !== '' && current.city !== departureLocation) {
-      acc.push(<LocationCard title={current.city} key={index} />);
+  const destinations = forecasts.reduce((acc, current, index) => {
+    if (departureLocation && departureLocation !== '' && current.city.name !== departureLocation) {
+      acc.push(<LocationCard title={current.city.name} forecast={current.list} key={index} />);
     }
 
     return acc;
