@@ -2,7 +2,7 @@ import React from 'react';
 
 interface LocationCardProps {
   title: string;
-  forecast?: any;
+  forecast?: unknown;
 }
 
 const LocationCard: React.FunctionComponent<LocationCardProps> = (props: LocationCardProps) => {
