@@ -1,4 +1,4 @@
-import { Server, Model } from 'miragejs';
+import { Server } from 'miragejs';
 
 import { forecasts } from './mock-data';
 
