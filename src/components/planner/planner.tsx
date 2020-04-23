@@ -59,7 +59,15 @@ const Planner: React.FunctionComponent = () => {
       if (departureLocationId && departureLocationId !== '' && currentLocation.id !== departureLocationId) {
         const locationForecast = forecasts.find(item => item.lat === currentLocation.lat && item.lon === currentLocation.lon);
         const locationFlight = flights.find(item => item.data && item.data.length > 0 && item.data[0].flyTo === currentLocation.id);
-        acc.push(<LocationCard title={currentLocation.city} forecast={locationForecast} flight={locationFlight} key={currentLocation.id} />);
+        acc.push(
+          <LocationCard
+            title={currentLocation.city}
+            forecast={locationForecast}
+            flight={locationFlight}
+            currency={currency}
+            key={currentLocation.id}
+          />
+        );
       }
 
       return acc;

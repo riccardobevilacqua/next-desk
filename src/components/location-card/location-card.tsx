@@ -10,6 +10,7 @@ interface LocationCardProps {
   flight: Flight;
   daysQty?: number;
   flightsQty?: number;
+  currency?: string;
 }
 
 const forecastDateFormat = 'EEEEEE dd/MM';
@@ -22,7 +23,8 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
   forecast,
   flight,
   daysQty = 5,
-  flightsQty = 5
+  flightsQty = 5,
+  currency = 'EUR'
 }: LocationCardProps) => {
   let weatherList: JSX.Element[];
   let flightList: JSX.Element[];
@@ -52,7 +54,7 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
         <tr key={item.id}>
           <td>{date}</td>
           <td>{time}</td>
-          <td>€{item.price}</td>
+          <td>{item.price} {currency}</td>
         </tr>
       );
     });
