@@ -50,19 +50,22 @@ const Planner: React.FunctionComponent = () => {
   };
 
   return (
-    <>
-      <section className="section">
-        <div className="container">
-          <LocationPicker
-            label="Departure"
-            value={departureLocation}
-            locations={locations}
-            onChange={handleDepartureChange}
-          />
-          {destinations}
-        </div>
-      </section>
-    </>
+    <section className="section">
+      <div className="container">
+        <LocationPicker
+          label="Depart from:"
+          value={departureLocation}
+          locations={locations}
+          onChange={handleDepartureChange}
+        />
+        <article className="message is-warning">
+          <div className="message-body">
+            <sup>*</sup> Due to COVID-19 flights might experience disruptions.
+            </div>
+        </article>
+        {destinations}
+      </div>
+    </section>
   );
 }
 
