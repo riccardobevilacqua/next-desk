@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, fromUnixTime } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompass } from '@fortawesome/free-solid-svg-icons';
 
 import { Forecast } from '../../common/forecast';
 import { Flight } from '../../common/flight';
@@ -26,11 +28,18 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
   flightsQty = 5,
   currency = 'EUR'
 }: LocationCardProps) => {
-  let weatherList: JSX.Element[];
-  let flightList: JSX.Element[];
+  const [isLoading, setIsLoading] = useState(true);
+
+  let forecastList: JSX.Element[] = [];
+  let flightList: JSX.Element[] = [];
+
+  useEffect(() => {
+    setIsLoading(forecastList.length === 0 || flightList.length === 0);
+  }, [forecastList, flightList]);
+
 
   if (forecast && forecast.daily && forecast.daily.length > 0) {
-    weatherList = [...(forecast.daily)].slice(0, daysQty).map((item, index) => {
+    forecastList = [...(forecast.daily)].slice(0, daysQty).map((item, index) => {
       const date = format(fromUnixTime(item.dt), forecastDateFormat);
       const description = item.weather[0].description;
       const temperature = Math.round(item.temp.day);
@@ -65,11 +74,18 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
       <div className="content">
         <p className="title">{title}</p>
         <table className="table">
-          <tbody>{weatherList}</tbody>
+          <tbody>{forecastList}</tbody>
         </table>
         <table className="table">
           <tbody>{flightList}</tbody>
         </table>
+        {
+          isLoading ?
+            <div className="has-text-centered">
+              <FontAwesomeIcon icon={faCompass} spin color="green" />
+            </div>
+            : null
+        }
       </div>
     </div>
   );
