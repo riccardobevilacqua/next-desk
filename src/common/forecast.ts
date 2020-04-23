@@ -1,53 +1,72 @@
-interface RootObject {
-  cod: string;
-  message: number;
-  cnt: number;
-  list: List[];
-  city: City;
-}
-
-interface City {
-  id: number;
-  name: string;
-  coord: Coord;
-  country: string;
-  population: number;
-  timezone: number;
-  sunrise: number;
-  sunset: number;
-}
-
-interface Coord {
+interface Forecast {
   lat: number;
   lon: number;
+  timezone: string;
+  current: Current;
+  hourly: Hourly[];
+  daily: Daily[];
 }
 
-interface List {
+interface Daily {
   dt: number;
-  main: Main;
+  sunrise: number;
+  sunset: number;
+  temp: Temp;
+  feels_like: Feelslike;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  wind_speed: number;
+  wind_deg: number;
   weather: Weather[];
-  clouds: Clouds;
-  wind: Wind;
-  sys: Sys;
-  dt_txt: string;
-  rain?: Rain;
+  clouds: number;
+  uvi: number;
 }
 
-interface Rain {
-  '3h': number;
+interface Feelslike {
+  day: number;
+  night: number;
+  eve: number;
+  morn: number;
 }
 
-interface Sys {
-  pod: string;
+interface Temp {
+  day: number;
+  min: number;
+  max: number;
+  night: number;
+  eve: number;
+  morn: number;
 }
 
-interface Wind {
-  speed: number;
-  deg: number;
+interface Hourly {
+  dt: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  clouds: number;
+  wind_speed: number;
+  wind_deg: number;
+  weather: Weather[];
 }
 
-interface Clouds {
-  all: number;
+interface Current {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  weather: Weather[];
 }
 
 interface Weather {
@@ -55,16 +74,4 @@ interface Weather {
   main: string;
   description: string;
   icon: string;
-}
-
-interface Main {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  sea_level: number;
-  grnd_level: number;
-  humidity: number;
-  temp_kf: number;
 }
