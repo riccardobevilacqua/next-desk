@@ -1,18 +1,11 @@
 const path = require('path');
-const dotenv = require('dotenv');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: {
     app: './src/index.tsx'
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    hot: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -54,9 +47,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.config().parsed)
-    }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/styles.css'
     }),
