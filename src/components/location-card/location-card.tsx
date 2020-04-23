@@ -4,6 +4,7 @@ import { format, fromUnixTime } from 'date-fns';
 interface LocationCardProps {
   title: string;
   forecast: Forecast;
+  flight: any;
   daysQty?: number;
 }
 
@@ -13,6 +14,7 @@ const forecastTempFormat = '°C';
 const LocationCard: React.FunctionComponent<LocationCardProps> = ({
   title,
   forecast,
+  flight,
   daysQty = 5,
 }: LocationCardProps) => {
   let weatherList: JSX.Element[];
