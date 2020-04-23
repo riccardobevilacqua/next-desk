@@ -4,16 +4,20 @@ Choose your next office to work from.
 
 ## Objective
 
-Implement a web app to choose an office from the following list:
+This *demo* app helps you choosing the next office to work from.
+
+Select the current office from the following list:
 
 - Amsterdam
 - Budapest
 - Madrid
 
-The following metrics are applied by the user:
+The other offices will be shown presenting:
 
 - Weather condition (the warmer the better)
 - Flight price (the cheaper the better)
+
+Based on these information you will have the opportunity to make an educated choice for your destination.
 
 ## Tech stack
 
