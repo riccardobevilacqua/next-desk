@@ -10,7 +10,7 @@ interface LocationPickerProps {
 }
 
 const LocationPicker: React.FunctionComponent<LocationPickerProps> = (props: LocationPickerProps) => {
-  const options: JSX.Element[] = props.locations.map((location, index) => {
+  const options = props.locations.map((location, index) => {
     return (
       <option value={location.city} key={index}>{location.city}</option>
     )
