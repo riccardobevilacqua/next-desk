@@ -1,4 +1,4 @@
-interface Forecast {
+export interface Forecast {
   lat: number;
   lon: number;
   timezone: string;
@@ -7,7 +7,7 @@ interface Forecast {
   daily: Daily[];
 }
 
-interface Daily {
+export interface Daily {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -23,14 +23,14 @@ interface Daily {
   uvi: number;
 }
 
-interface Feelslike {
+export interface Feelslike {
   day: number;
   night: number;
   eve: number;
   morn: number;
 }
 
-interface Temp {
+export interface Temp {
   day: number;
   min: number;
   max: number;
@@ -39,7 +39,7 @@ interface Temp {
   morn: number;
 }
 
-interface Hourly {
+export interface Hourly {
   dt: number;
   temp: number;
   feels_like: number;
@@ -52,7 +52,7 @@ interface Hourly {
   weather: Weather[];
 }
 
-interface Current {
+export interface Current {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -69,7 +69,7 @@ interface Current {
   weather: Weather[];
 }
 
-interface Weather {
+export interface Weather {
   id: number;
   main: string;
   description: string;

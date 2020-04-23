@@ -1,10 +1,13 @@
 import React from 'react';
 import { format, fromUnixTime } from 'date-fns';
 
+import { Forecast } from '../../common/forecast';
+import { Flight } from '../../common/flight';
+
 interface LocationCardProps {
   title: string;
   forecast: Forecast;
-  flight: any;
+  flight: Flight;
   daysQty?: number;
   flightsQty?: number;
 }
