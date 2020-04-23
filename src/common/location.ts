@@ -6,7 +6,7 @@ export interface Location {
   lon: number;
 }
 
-const locations: Location[] = [
+export const locations: Location[] = [
   {
     id: 'AMS',
     city: 'Amsterdam',
@@ -29,5 +29,3 @@ const locations: Location[] = [
     lon: 3.7
   }
 ];
-
-export { locations };
