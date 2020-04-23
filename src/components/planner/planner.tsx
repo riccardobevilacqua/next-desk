@@ -4,12 +4,14 @@ import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
 import { Location, locations } from '../../common/location';
 
+const forecastServiceURL = 'https://api.openweathermap.org/data/2.5/onecall';
+
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
   const [forecasts, setForecasts] = useState([]);
 
   const fetchData = async (location: Location) => {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
+    const response = await fetch(`${forecastServiceURL}?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
     const parsed = await response.json();
 
     setForecasts(prevState => {
@@ -30,7 +32,7 @@ const Planner: React.FunctionComponent = () => {
   }, [departureLocation]);
 
   const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDepartureLocation(e.target.value)
+    setDepartureLocation(e.target.value);
   };
 
   const destinations = locations.reduce((acc, currentLocation, index) => {
