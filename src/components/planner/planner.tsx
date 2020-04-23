@@ -9,6 +9,7 @@ const forecastServiceURL = 'https://api.openweathermap.org/data/2.5/onecall';
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
   const [forecasts, setForecasts] = useState([]);
+  const [destinations, setDestinations] = useState([]);
 
   const fetchData = async (location: Location) => {
     const response = await fetch(`${forecastServiceURL}?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
@@ -31,18 +32,22 @@ const Planner: React.FunctionComponent = () => {
     }
   }, [departureLocation]);
 
+  useEffect(() => {
+    const cards = locations.reduce((acc, currentLocation, index) => {
+      if (departureLocation && departureLocation !== '' && currentLocation.city !== departureLocation) {
+        const locationForecast = forecasts.find(item => item.lat === currentLocation.lat && item.lon === currentLocation.lon);
+        acc.push(<LocationCard title={currentLocation.city} forecast={locationForecast} key={index} />);
+      }
+
+      return acc;
+    }, []);
+
+    setDestinations(cards);
+  }, [forecasts]);
+
   const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDepartureLocation(e.target.value);
   };
-
-  const destinations = locations.reduce((acc, currentLocation, index) => {
-    if (departureLocation && departureLocation !== '' && currentLocation.city !== departureLocation) {
-      const locationForecast = forecasts.find(item => item.lat === currentLocation.lat && item.lon === currentLocation.lon);
-      acc.push(<LocationCard title={currentLocation.city} forecast={locationForecast} key={index} />);
-    }
-
-    return acc;
-  }, []);
 
   return (
     <>
