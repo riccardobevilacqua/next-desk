@@ -18,6 +18,7 @@ const Planner: React.FunctionComponent = () => {
   const [forecasts, setForecasts] = useState([]);
   const [flights, setFlights] = useState([]);
   const [destinations, setDestinations] = useState([]);
+  console.info('PROCESS ENV:', process.env);
 
   const fetchForecast = async (location: Location) => {
     const response = await fetch(`${forecastServiceURL}?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
