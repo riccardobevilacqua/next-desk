@@ -2,25 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
-import { locations } from '../../common/location';
+import { Location, locations } from '../../common/location';
 
 const Planner: React.FunctionComponent = () => {
   const [departureLocation, setDepartureLocation] = useState('');
   const [forecasts, setForecasts] = useState([]);
 
-  const fetchData = async (forecastId: number) => {
-    const response = await fetch('/api/forecasts/' + forecastId);
+  const fetchData = async (location: Location) => {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
     const parsed = await response.json();
 
     setForecasts(prevState => {
-      const list = [...prevState];
-      const index = list.findIndex(item => item.city.id === forecastId);
+      const others = [...prevState].filter(item => item.lat !== location.lat && item.lon !== location.lon);
 
-      if (index > -1) {
-        return list.map(item => item.city.id === forecastId ? parsed : item);
-      } else {
-        return [...list, parsed];
-      }
+      return [...others, parsed];
     });
   };
 
@@ -28,7 +23,7 @@ const Planner: React.FunctionComponent = () => {
     if (departureLocation && departureLocation !== '') {
       locations.forEach(location => {
         if (location.city !== departureLocation) {
-          fetchData(location.forecastId);
+          fetchData(location);
         }
       });
     }
@@ -38,9 +33,10 @@ const Planner: React.FunctionComponent = () => {
     setDepartureLocation(e.target.value)
   };
 
-  const destinations = forecasts.reduce((acc, current, index) => {
-    if (departureLocation && departureLocation !== '' && current.city.name !== departureLocation) {
-      acc.push(<LocationCard title={current.city.name} forecast={current.list} key={index} />);
+  const destinations = locations.reduce((acc, currentLocation, index) => {
+    if (departureLocation && departureLocation !== '' && currentLocation.city !== departureLocation) {
+      const locationForecast = forecasts.find(item => item.lat === currentLocation.lat && item.lon === currentLocation.lon);
+      acc.push(<LocationCard title={currentLocation.city} forecast={locationForecast} key={index} />);
     }
 
     return acc;
