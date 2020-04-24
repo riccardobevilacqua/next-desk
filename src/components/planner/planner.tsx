@@ -5,15 +5,26 @@ import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
 import { Location, locations } from '../../common/location';
 
-const forecastServiceURL = 'https://api.openweathermap.org/data/2.5/onecall';
-const flightServiceURL = 'https://kiwicom-prod.apigee.net/v2/search';
 
-const flightDateFormat = 'dd/MM/yyyy';
-const flightDaysQty = 7;
-const flightMaxStopOver = 1;
-const currency = 'EUR';
+interface PlannerProps {
+  forecastServiceURL?: string;
+  flightServiceURL?: string;
+  flightDateFormat?: string;
+  flightDaysQty?: number;
+  flightMaxStopOver?: number;
+  currencyId?: string;
+  languageId?: string;
+}
 
-const Planner: React.FunctionComponent = () => {
+const Planner: React.FunctionComponent<PlannerProps> = ({
+  forecastServiceURL = 'https://api.openweathermap.org/data/2.5/onecall',
+  flightServiceURL = 'https://kiwicom-prod.apigee.net/v2/search',
+  flightDateFormat = 'dd/MM/yyyy',
+  flightDaysQty = 7,
+  flightMaxStopOver = 1,
+  currencyId = 'EUR',
+  languageId = 'en-GB'
+}: PlannerProps) => {
   const [departureLocationId, setDepartureLocationId] = useState('');
   const [forecasts, setForecasts] = useState([]);
   const [flights, setFlights] = useState([]);
@@ -33,7 +44,7 @@ const Planner: React.FunctionComponent = () => {
   const fetchFlight = async (location: Location) => {
     const dateFrom = format(new Date(), flightDateFormat);
     const dateTo = format(addDays(new Date(), flightDaysQty), flightDateFormat);
-    const response = await fetch(`${flightServiceURL}?fly_from=${departureLocationId}&fly_to=${location.id}&max_stopovers=${flightMaxStopOver}&dateFrom=${dateFrom}&dateTo=${dateTo}&curr=${currency}&apikey=${process.env.FLIGHT_API_KEY}`);
+    const response = await fetch(`${flightServiceURL}?fly_from=${departureLocationId}&fly_to=${location.id}&max_stopovers=${flightMaxStopOver}&dateFrom=${dateFrom}&dateTo=${dateTo}&curr=${currencyId}&apikey=${process.env.FLIGHT_API_KEY}`);
     const parsed = await response.json();
 
     setFlights(prevState => {
@@ -64,7 +75,8 @@ const Planner: React.FunctionComponent = () => {
             title={currentLocation.city}
             forecast={locationForecast}
             flight={locationFlight}
-            currency={currency}
+            currencyId={currencyId}
+            languageId={languageId}
             key={currentLocation.id}
           />
         );

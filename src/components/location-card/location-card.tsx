@@ -5,6 +5,7 @@ import { faCompass } from '@fortawesome/free-solid-svg-icons';
 
 import { Forecast } from '../../common/forecast';
 import { Flight } from '../../common/flight';
+import { formatCurrency } from '../../common/currency';
 
 interface LocationCardProps {
   title: string;
@@ -12,13 +13,14 @@ interface LocationCardProps {
   flight: Flight;
   daysQty?: number;
   flightsQty?: number;
-  currency?: string;
+  currencyId?: string;
+  languageId?: string;
+  forecastDateFormat?: string;
+  flightDateFormat?: string;
+  flightTimeFormat?: string;
+  forecastTempFormat?: string;
 }
 
-const forecastDateFormat = 'EEEEEE dd/MM';
-const flightDateFormat = 'EEEEEE dd/MM';
-const flightTimeFormat = 'HH:mm';
-const forecastTempFormat = '°C';
 
 const LocationCard: React.FunctionComponent<LocationCardProps> = ({
   title,
@@ -26,7 +28,12 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
   flight,
   daysQty = 5,
   flightsQty = 5,
-  currency = 'EUR'
+  currencyId = 'EUR',
+  languageId = 'en-GB',
+  forecastDateFormat = 'EEEEEE dd/MM',
+  flightDateFormat = 'EEEEEE dd/MM',
+  flightTimeFormat = 'HH:mm',
+  forecastTempFormat = '°C'
 }: LocationCardProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -59,11 +66,14 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
       const dateRaw = new Date(item.local_departure);
       const date = format(dateRaw, flightDateFormat);
       const time = format(dateRaw, flightTimeFormat);
+      const price = formatCurrency(item.price, languageId, currencyId);
       return (
         <tr key={item.id}>
           <td>{date}</td>
           <td>{time}</td>
-          <td>{item.price} {currency}</td>
+          <td>
+            <a href="https://www.kiwi.com/" target="_blank" rel="noopener noreferrer">{price}</a>
+          </td>
         </tr>
       );
     });
@@ -75,13 +85,13 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
         <h2 className="title is-spaced">{title}</h2>
         <div className="columns">
           <div className="column">
-            <h3 className="subtitle">Forecast</h3>
+            <h3 className="subtitle">Weather Forecast</h3>
             <table className="table">
               <tbody>{forecastList}</tbody>
             </table>
           </div>
           <div className="column">
-            <h3 className="subtitle">Flights</h3>
+            <h3 className="subtitle">Cheapest Flights</h3>
             <table className="table">
               <tbody>{flightList}</tbody>
             </table>
