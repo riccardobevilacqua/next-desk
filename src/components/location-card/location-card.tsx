@@ -72,10 +72,12 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
   return (
     <div className="box">
       <div className="content">
-        <p className="title">{title}</p>
+        <h2 className="title is-spaced">{title}</h2>
+        <h3 className="subtitle">Forecast</h3>
         <table className="table">
           <tbody>{forecastList}</tbody>
         </table>
+        <h3 className="subtitle">Flights</h3>
         <table className="table">
           <tbody>{flightList}</tbody>
         </table>
