@@ -76,8 +76,10 @@ const Planner: React.FunctionComponent = () => {
     setDestinations(cards);
   }, [forecasts, flights]);
 
-  const handleDepartureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDepartureLocationId(e.target.value);
+  const handleDepartureChange = (locationId: string) => {
+    if (locationId && locationId !== departureLocationId) {
+      setDepartureLocationId(locationId);
+    }
   };
 
   return (

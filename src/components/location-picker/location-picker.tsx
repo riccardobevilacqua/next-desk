@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Location } from '../../common/location';
 
@@ -6,11 +6,22 @@ interface LocationPickerProps {
   label: string;
   value: string;
   locations: Location[];
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (locationId: string) => void;
 }
 
-const LocationPicker: React.FunctionComponent<LocationPickerProps> = (props: LocationPickerProps) => {
-  const options = props.locations.map((location) => {
+const LocationPicker: React.FunctionComponent<LocationPickerProps> = ({
+  label,
+  value,
+  locations,
+  onChange,
+}: LocationPickerProps) => {
+  useEffect(() => {
+    if (locations && locations.length > 0) {
+      onChange(locations[0].id);
+    }
+  }, []);
+
+  const options = locations.map((location) => {
     return (
       <option value={location.id} key={location.id}>{location.city}</option>
     )
@@ -18,10 +29,10 @@ const LocationPicker: React.FunctionComponent<LocationPickerProps> = (props: Loc
 
   return (
     <div className="field">
-      <label className="label">{props.label}</label>
+      <label className="label">{label}</label>
       <div className="control">
         <div className="select">
-          <select value={props.value} onChange={e => props.onChange(e)}>
+          <select value={value} onChange={e => onChange(e.target.value)}>
             <option value="">-</option>
             {options}
           </select>
