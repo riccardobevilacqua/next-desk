@@ -73,14 +73,20 @@ const LocationCard: React.FunctionComponent<LocationCardProps> = ({
     <div className="box">
       <div className="content">
         <h2 className="title is-spaced">{title}</h2>
-        <h3 className="subtitle">Forecast</h3>
-        <table className="table">
-          <tbody>{forecastList}</tbody>
-        </table>
-        <h3 className="subtitle">Flights</h3>
-        <table className="table">
-          <tbody>{flightList}</tbody>
-        </table>
+        <div className="columns">
+          <div className="column">
+            <h3 className="subtitle">Forecast</h3>
+            <table className="table">
+              <tbody>{forecastList}</tbody>
+            </table>
+          </div>
+          <div className="column">
+            <h3 className="subtitle">Flights</h3>
+            <table className="table">
+              <tbody>{flightList}</tbody>
+            </table>
+          </div>
+        </div>
         {
           isLoading ?
             <div className="has-text-centered">
