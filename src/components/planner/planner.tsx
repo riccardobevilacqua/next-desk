@@ -4,6 +4,7 @@ import { format, addDays } from 'date-fns';
 import { LocationPicker } from '../location-picker/location-picker';
 import { LocationCard } from '../location-card/location-card';
 import { Location, locations } from '../../common/location';
+import { useDebounce } from '../../common/debounce';
 
 const forecastServiceURL = 'https://api.openweathermap.org/data/2.5/onecall';
 const flightServiceURL = 'https://kiwicom-prod.apigee.net/v2/search';
@@ -18,6 +19,8 @@ const Planner: React.FunctionComponent = () => {
   const [forecasts, setForecasts] = useState([]);
   const [flights, setFlights] = useState([]);
   const [destinations, setDestinations] = useState([]);
+
+  const debouncedDepartureLocationId = useDebounce(departureLocationId, 5000);
 
   const fetchForecast = async (location: Location) => {
     const response = await fetch(`${forecastServiceURL}?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
@@ -52,7 +55,7 @@ const Planner: React.FunctionComponent = () => {
         }
       });
     }
-  }, [departureLocationId]);
+  }, [debouncedDepartureLocationId]);
 
   useEffect(() => {
     const cards = locations.reduce((acc, currentLocation) => {
