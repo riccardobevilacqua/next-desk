@@ -2,6 +2,8 @@
 
 Choose your next office to work from.
 
+[PREVIEW](https://tender-dijkstra-58fe01.netlify.app/)
+
 ## Objective
 
 This *demo* app helps you choosing the next office to work from.
