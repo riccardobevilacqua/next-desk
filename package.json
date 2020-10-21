@@ -7,6 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint . --ext .ts,.tsx",
     "start": "webpack-dev-server --config webpack.dev.js",
+    "start:netlify": "netlify dev",
     "test": "jest",
     "test:watch": "jest --watch",
     "watch": "webpack --watch"
@@ -20,6 +21,7 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "date-fns": "^2.12.0",
     "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
