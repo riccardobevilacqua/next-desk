@@ -7,8 +7,6 @@ import { Location, locations } from '../../common/location';
 
 
 interface PlannerProps {
-  forecastServiceURL?: string;
-  flightServiceURL?: string;
   flightDateFormat?: string;
   flightDaysQty?: number;
   flightMaxStopOver?: number;
@@ -17,8 +15,6 @@ interface PlannerProps {
 }
 
 const Planner: React.FunctionComponent<PlannerProps> = ({
-  forecastServiceURL = 'https://api.openweathermap.org/data/2.5/onecall',
-  flightServiceURL = 'https://kiwicom-prod.apigee.net/v2/search',
   flightDateFormat = 'dd/MM/yyyy',
   flightDaysQty = 7,
   flightMaxStopOver = 1,
@@ -31,7 +27,7 @@ const Planner: React.FunctionComponent<PlannerProps> = ({
   const [destinations, setDestinations] = useState([]);
 
   const fetchForecast = async (location: Location) => {
-    const response = await fetch(`${forecastServiceURL}?units=metric&lat=${location.lat}&lon=${location.lon}&appid=${process.env.FORECAST_API_KEY}`);
+    const response = await fetch(`./.netlify/functions/forecast?lat=${location.lat}&lon=${location.lon}`);
     const parsed = await response.json();
 
     setForecasts(prevState => {
@@ -44,7 +40,7 @@ const Planner: React.FunctionComponent<PlannerProps> = ({
   const fetchFlight = async (location: Location) => {
     const dateFrom = format(new Date(), flightDateFormat);
     const dateTo = format(addDays(new Date(), flightDaysQty), flightDateFormat);
-    const response = await fetch(`${flightServiceURL}?fly_from=${departureLocationId}&fly_to=${location.id}&max_stopovers=${flightMaxStopOver}&dateFrom=${dateFrom}&dateTo=${dateTo}&curr=${currencyId}&apikey=${process.env.FLIGHT_API_KEY}`);
+    const response = await fetch(`./.netlify/functions/flight?fly_from=${departureLocationId}&fly_to=${location.id}&max_stopovers=${flightMaxStopOver}&dateFrom=${dateFrom}&dateTo=${dateTo}&curr=${currencyId}`);
     const parsed = await response.json();
 
     setFlights(prevState => {
