@@ -6,6 +6,7 @@ Choose your next office to work from.
 
 ## Objective
 
+You work in a company with offices in Amsterdam, Budapest, and Madrid.
 This *demo* app helps you choosing the next office to work from.
 
 Select the current office from the following list:
