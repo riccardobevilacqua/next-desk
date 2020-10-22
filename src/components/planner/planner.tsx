@@ -14,6 +14,7 @@ interface PlannerProps {
   languageId?: string;
 }
 
+// In a real application these configuration would most likely be at application level
 const Planner: React.FunctionComponent<PlannerProps> = ({
   flightDateFormat = 'dd/MM/yyyy',
   flightDaysQty = 7,
