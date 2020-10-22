@@ -22,6 +22,7 @@ const Planner: React.FunctionComponent<PlannerProps> = ({
   currencyId = 'EUR',
   languageId = 'en-GB'
 }: PlannerProps) => {
+  // This project might have used a store, but I decided to experiment with React Hooks
   const [departureLocationId, setDepartureLocationId] = useState('');
   const [forecasts, setForecasts] = useState([]);
   const [flights, setFlights] = useState([]);
