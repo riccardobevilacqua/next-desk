@@ -27,6 +27,7 @@ const Planner: React.FunctionComponent<PlannerProps> = ({
   const [flights, setFlights] = useState([]);
   const [destinations, setDestinations] = useState([]);
 
+  // Netlify functions are lambdas masking the real API calls and the API keys used, which are store in environment variables
   const fetchForecast = async (location: Location) => {
     const response = await fetch(`./.netlify/functions/forecast?lat=${location.lat}&lon=${location.lon}`);
     const parsed = await response.json();
