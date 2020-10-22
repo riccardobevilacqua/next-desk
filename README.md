@@ -32,3 +32,4 @@ This projects has been developed using:
 - Typescript
 - Bulma
 - Webpack
+- Netlify Functions (Lambdas)
