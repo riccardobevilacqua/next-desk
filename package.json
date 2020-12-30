@@ -1,6 +1,6 @@
 {
   "name": "next-desk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Choose your next office to work from",
   "main": "dist/js/index.js",
   "scripts": {
